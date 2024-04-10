@@ -1,4 +1,12 @@
-﻿List<GangMembers> gangMembers = new List<GangMembers>()
+﻿// The program should be updated to...
+
+// Create a way to store several team members.
+// Collect several team members' information.
+// Stop collecting team members when a blank name is entered.
+
+// Display each team member's information.
+
+List<GangMembers> gangMembers = new List<GangMembers>()
 {
     
 };
@@ -14,9 +22,15 @@ AddATeamMember();
 
 void AddATeamMember()
 {
+    string NameResponse ="abc";
+   
+    do{
     Console.WriteLine("Please enter a team member name:");
-    string NameResponse = Console.ReadLine().Trim();
-
+    NameResponse = Console.ReadLine().Trim();
+    if(string.IsNullOrEmpty(NameResponse))
+    {
+        break;
+    }
     Console.WriteLine("Please enter team members skill level:");
     int SkillLevelResponse = int.Parse(Console.ReadLine().Trim());
 
@@ -34,5 +48,15 @@ void AddATeamMember()
 
     gangMembers.Add(newGangMember);
 
-   Console.WriteLine($"You have entered {newGangMember.Name} with a Skill Level of: {newGangMember.SkillLevel} and a courage level of: {newGangMember.CourageFactor}");
+//    Console.WriteLine($"You have entered {newGangMember.Name} with a Skill Level of: {newGangMember.SkillLevel} and a courage level of: {newGangMember.CourageFactor}");
+    }while(!string.IsNullOrEmpty(NameResponse));
+    // Display a message containing the number of members of the team.
+    Console.WriteLine($"Gang memebers : {gangMembers.Count}");
+    int i=1;
+    foreach(GangMembers gm in gangMembers)
+    {
+        Console.WriteLine("Gang member details");
+        Console.WriteLine($"{i}. Name : {gm.Name} Skill Level : {gm.SkillLevel} and Courage factor : {gm.CourageFactor}");
+    }
+    
 }
