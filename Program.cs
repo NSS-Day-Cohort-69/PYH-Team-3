@@ -24,7 +24,8 @@ void AddATeamMember()
 {
     string NameResponse ="abc";
    
-    do{
+    while(!string.IsNullOrEmpty(NameResponse))
+    {
     Console.WriteLine("Please enter a team member name:");
     NameResponse = Console.ReadLine().Trim();
     if(string.IsNullOrEmpty(NameResponse))
@@ -49,7 +50,7 @@ void AddATeamMember()
     gangMembers.Add(newGangMember);
 
 //    Console.WriteLine($"You have entered {newGangMember.Name} with a Skill Level of: {newGangMember.SkillLevel} and a courage level of: {newGangMember.CourageFactor}");
-    }while(!string.IsNullOrEmpty(NameResponse));
+    };
     // Display a message containing the number of members of the team.
     Console.WriteLine($"Gang memebers : {gangMembers.Count}");
     int i=1;
