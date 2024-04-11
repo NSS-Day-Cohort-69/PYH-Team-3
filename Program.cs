@@ -8,10 +8,12 @@ AddATeamMember();
 
 void AddATeamMember()
 {
+    Console.WriteLine("How Difficult will this bank be? (1-Infinity and Beyond)");
+    int bankPresetDifficulty = int.Parse(Console.ReadLine().Trim()); // At the beginning of the program, prompt the user to enter the difficulty level of the bank.
+
     Random random = new Random();
 
     string NameResponse = "abc";
-    
 
     while (!string.IsNullOrEmpty(NameResponse))
     {
@@ -25,9 +27,7 @@ void AddATeamMember()
         int SkillLevelResponse = int.Parse(Console.ReadLine().Trim());
 
         Console.WriteLine(
-            @"Please enter team members courage factor.
-                
-            Please enter a decimal between 0.0 and 2.0:"
+            "\nPlease enter team members courage factor.\nPlease enter a decimal between 0.0 and 2.0:"
         );
         decimal CourageFactorResponse = decimal.Parse(Console.ReadLine().Trim());
 
@@ -43,51 +43,54 @@ void AddATeamMember()
         //    Console.WriteLine($"You have entered {newGangMember.Name} with a Skill Level of: {newGangMember.SkillLevel} and a courage level of: {newGangMember.CourageFactor}");
     }
     ;
-     Console.WriteLine($"Gang memebers : {gangMembers.Count}"); // Display a message containing the number of members of the team.
+    Console.WriteLine($"Gang memebers : {gangMembers.Count}"); // Display a message containing the number of members of the team.
     int SkillLevelTotal = 0; // Sum the skill levels of the team. Save that number.
     foreach (GangMembers gangmember in gangMembers)
     {
         SkillLevelTotal += gangmember.SkillLevel;
-        
     }
+
     Console.WriteLine($"SkillSum: {SkillLevelTotal}");
     Console.WriteLine("Enter desired trial runs: ");
-    int trialRuns=int.Parse(Console.ReadLine().Trim());
-    
-    while(trialRuns>0)
+    int trialRuns = int.Parse(Console.ReadLine().Trim());
+    int failedAttempt = 0;
+    int completedAttempt = 0;
+
+    while (trialRuns > 0)
     {
         int luckValue = random.Next(-10, 11);
-        int banksDifficulty = 100; // Store a value for the bank's difficulty level. Set this value to 100.
+        int banksDifficulty = bankPresetDifficulty; // Store a value for the bank's difficulty level. Set this value to 100.
+        // Setting Bankdifficulty to Preset to avoid, 1. 110, 2. 120.
+
         banksDifficulty += luckValue;
         Console.WriteLine($"Bank Difficulty level: {banksDifficulty}");
-    
-    if (SkillLevelTotal >= banksDifficulty) // Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
-    {
 
-        Console.WriteLine("Success! You lived a life of crime.");
+        if (SkillLevelTotal >= banksDifficulty) // Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
+        {
+            Console.WriteLine("Success! You lived a life of crime.");
+            completedAttempt++;
+        }
+        else
+        {
+            Console.WriteLine("Agh.. Jail time.");
+            failedAttempt++;
+        }
+        trialRuns--;
     }
-    else
-    {
-        Console.WriteLine("Agh.. Jail time.");
-    }
-     trialRuns--;
 
-    }
-
-   
-
-    // int i = 1;
-    // foreach (GangMembers gm in gangMembers) // Stop displaying each team member's information.
-    // {
-    //     Console.WriteLine("Gang member details");
-    //     Console.WriteLine(
-    //         $"{i}. Name : {gm.Name} Skill Level : {gm.SkillLevel} and Courage factor : {gm.CourageFactor}"
-    //     );
-    // }
-
-   
+    // At the end of the program, display a report showing the number of successful runs and the number of failed runs.
+    Console.WriteLine(
+        @$"
+    Successful Runs: {completedAttempt}
+    Failed Runs: {failedAttempt}"
+    );
 }
-// //Phase 5
-// Run the scenario multiple times.
-// After the user enters the team information, prompt them to enter the number of trial runs the program should perform.
-// Loop through the difficulty / skill level calculation based on the user-entered number of trial runs. Choose a new luck value each time.
+
+// int i = 1;
+// foreach (GangMembers gm in gangMembers) // Stop displaying each team member's information.
+// {
+//     Console.WriteLine("Gang member details");
+//     Console.WriteLine(
+//         $"{i}. Name : {gm.Name} Skill Level : {gm.SkillLevel} and Courage factor : {gm.CourageFactor}"
+//     );
+// }
