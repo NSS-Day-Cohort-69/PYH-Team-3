@@ -8,8 +8,12 @@ AddATeamMember();
 
 void AddATeamMember()
 {
+    Random random = new Random();
+
     string NameResponse = "abc";
+    int randomNumber = random.Next(-10, 11);
     int banksDifficulty = 100; // Store a value for the bank's difficulty level. Set this value to 100.
+    banksDifficulty += randomNumber;
 
     while (!string.IsNullOrEmpty(NameResponse))
     {
@@ -61,9 +65,11 @@ void AddATeamMember()
     }
 
     Console.WriteLine($"SkillSum: {SkillLevelTotal}");
+    Console.WriteLine($"Bank Difficulty level: {banksDifficulty}");
 
     if (SkillLevelTotal >= banksDifficulty) // Compare the number with the bank's difficulty level. If the team's skill level is greater than or equal to the bank's difficulty level, Display a success message, otherwise display a failure message.
     {
+
         Console.WriteLine("Success! You lived a life of crime.");
     }
     else
